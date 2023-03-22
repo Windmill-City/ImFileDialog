@@ -1221,10 +1221,7 @@ void FileDialog::m_renderContent()
     // table view
     if (m_zoom == 1.0f)
     {
-        if (ImGui::BeginTable("##contentTable",
-                              3,
-                              /*ImGuiTableFlags_Resizable |*/ ImGuiTableFlags_Sortable,
-                              ImVec2(0, -FLT_MIN)))
+        if (ImGui::BeginTable("##contentTable", 3, ImGuiTableFlags_Sortable, ImVec2(0, -FLT_MIN)))
         {
             // header
             ImGui::TableSetupColumn("Name##filename", ImGuiTableColumnFlags_WidthStretch, 0.0f - 1.0f, 0);
@@ -1512,7 +1509,10 @@ void FileDialog::m_renderFileDialog()
     /***** CONTENT *****/
     float bottomBarHeight =
         (GImGui->FontSize + ImGui::GetStyle().FramePadding.y + ImGui::GetStyle().ItemSpacing.y * 2.0f) * 2;
-    if (ImGui::BeginTable("##table", 2, ImGuiTableFlags_Resizable, ImVec2(0, -bottomBarHeight)))
+    if (ImGui::BeginTable("##table",
+                          2,
+                          ImGuiTableFlags_Resizable | ImGuiTableFlags_BordersOuter,
+                          ImVec2(0, -bottomBarHeight)))
     {
         ImGui::TableSetupColumn("##tree", ImGuiTableColumnFlags_WidthFixed, 125.0f);
         ImGui::TableSetupColumn("##content", ImGuiTableColumnFlags_WidthStretch);
