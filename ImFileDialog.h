@@ -140,6 +140,7 @@ class FileDialog
     std::vector<std::filesystem::path> m_result;
     bool                               m_finalize(const std::string& filename = "");
 
+    std::string                           m_filter_last;
     std::string                           m_filter;
     std::vector<std::vector<std::string>> m_filterExtensions;
     size_t                                m_filterSelection;

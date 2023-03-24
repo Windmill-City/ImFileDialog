@@ -750,6 +750,9 @@ bool FileDialog::m_finalize(const std::string& filename)
 
 void FileDialog::m_parseFilter(const std::string& filter)
 {
+    // Keep the selection if filter not changed
+    if (m_filter_last == filter) return;
+    m_filter_last = filter;
     m_filter = "";
     m_filterExtensions.clear();
     m_filterSelection = 0;
@@ -1216,7 +1219,7 @@ void FileDialog::m_renderTree(FileTreeNode* node)
 
 void FileDialog::m_renderContent()
 {
-    if (ImGui::IsMouseClicked(ImGuiMouseButton_Left)) m_selectedFileItem = -1;
+    if (ImGui::IsItemClicked(ImGuiMouseButton_Left)) m_selectedFileItem = -1;
 
     // table view
     if (m_zoom == 1.0f)
