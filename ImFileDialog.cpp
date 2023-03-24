@@ -1216,7 +1216,7 @@ void FileDialog::m_renderTree(FileTreeNode* node)
 
 void FileDialog::m_renderContent()
 {
-    if (ImGui::IsMouseClicked(ImGuiMouseButton_Right)) m_selectedFileItem = -1;
+    if (ImGui::IsMouseClicked(ImGuiMouseButton_Left)) m_selectedFileItem = -1;
 
     // table view
     if (m_zoom == 1.0f)
@@ -1284,7 +1284,7 @@ void FileDialog::m_renderContent()
                             m_select(entry.Path, ImGui::GetIO().KeyCtrl);
                     }
                 }
-                if (ImGui::IsItemClicked(ImGuiMouseButton_Right)) m_selectedFileItem = fileId;
+                if (ImGui::IsItemClicked(ImGuiMouseButton_Left)) m_selectedFileItem = fileId;
                 fileId++;
 
                 // date
@@ -1355,9 +1355,16 @@ void FileDialog::m_renderContent()
                         m_select(entry.Path, ImGui::GetIO().KeyCtrl);
                 }
             }
-            if (ImGui::IsItemClicked(ImGuiMouseButton_Right)) m_selectedFileItem = fileId;
+            if (ImGui::IsItemClicked(ImGuiMouseButton_Left)) m_selectedFileItem = fileId;
             fileId++;
         }
+    }
+
+    // Clear selections when clicked empty space
+    if (ImGui::IsMouseClicked(ImGuiMouseButton_Left) && m_selectedFileItem == -1)
+    {
+        m_selections.clear();
+        m_inputTextbox[0] = '\0';
     }
 }
 
