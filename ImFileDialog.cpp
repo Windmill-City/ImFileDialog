@@ -1219,7 +1219,8 @@ void FileDialog::m_renderTree(FileTreeNode* node)
 
 void FileDialog::m_renderContent()
 {
-    if (ImGui::IsItemClicked(ImGuiMouseButton_Left)) m_selectedFileItem = -1;
+    bool clickedContent = ImGui::IsMouseClicked(ImGuiMouseButton_Left) && ImGui::IsWindowHovered();
+    if (clickedContent) m_selectedFileItem = -1;
 
     // table view
     if (m_zoom == 1.0f)
@@ -1364,7 +1365,7 @@ void FileDialog::m_renderContent()
     }
 
     // Clear selections when clicked empty space
-    if (ImGui::IsMouseClicked(ImGuiMouseButton_Left) && m_selectedFileItem == -1)
+    if (clickedContent && m_selectedFileItem == -1)
     {
         m_selections.clear();
         m_inputTextbox[0] = '\0';
