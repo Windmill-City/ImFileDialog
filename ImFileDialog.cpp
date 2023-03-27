@@ -1265,6 +1265,8 @@ void FileDialog::m_renderContent()
                 ImGui::TableSetColumnIndex(0);
                 ImGui::Image((ImTextureID)m_getIcon(entry.Path), ImVec2(ICON_SIZE, ICON_SIZE));
                 ImGui::SameLine();
+                if (isSelected)
+                    ImGui::PushStyleColor(ImGuiCol_Header, ImGui::GetStyleColorVec4(ImGuiCol_HeaderHovered));
                 if (ImGui::Selectable(filename.c_str(),
                                       isSelected,
                                       ImGuiSelectableFlags_SpanAllColumns | ImGuiSelectableFlags_AllowDoubleClick))
@@ -1288,6 +1290,7 @@ void FileDialog::m_renderContent()
                             m_select(entry.Path, ImGui::GetIO().KeyCtrl);
                     }
                 }
+                if (isSelected) ImGui::PopStyleColor();
                 if (ImGui::IsItemClicked(ImGuiMouseButton_Left)) m_selectedFileItem = fileId;
                 fileId++;
 
